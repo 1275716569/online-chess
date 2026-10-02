@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#122a2b">
+    <title>棋友 · 在线国际象棋</title>
+    <link rel="stylesheet" href="/styles.css">
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="topbar">
+        <a class="brand" href="/" aria-label="棋友首页"><span class="brand-mark">♞</span><span>棋友<span class="brand-dot">.</span></span></a>
+        <div class="connection-pill"><span id="connection-dot" class="connection-dot"></span><span id="connection-status">正在连接</span></div>
+      </header>
+
+      <main>
+        <section id="lobby" class="lobby-view">
+          <div class="lobby-intro">
+            <p class="eyebrow">ONLINE CHESS ROOM</p>
+            <h1>下一步，<span>和朋友一起下。</span></h1>
+            <p class="intro-copy">开一间私人棋室，把邀请发给朋友。</p>
+          </div>
+          <div class="lobby-actions">
+            <section class="create-section">
+              <div class="section-index">01 <span>开局</span></div>
+              <h2>创建一间棋室</h2>
+              <p>你执白先行，朋友加入后即可开始。</p>
+              <button id="create-room" class="primary-button"><span>创建房间</span><span class="button-arrow" aria-hidden="true">↗</span></button>
+            </section>
+            <section class="join-section">
+              <div class="section-index">02 <span>加入</span></div>
+              <h2>输入房间码</h2>
+              <p>朋友发来的 6 位代码。</p>
+              <div class="join-row">
+                <input id="room-code-input" maxlength="6" placeholder="例如 A7K9Q2" autocomplete="off" aria-label="6 位房间码">
+                <button id="join-room" class="join-button" aria-label="加入房间"><span>加入</span><span aria-hidden="true">→</span></button>
+              </div>
+            </section>
+          </div>
+          <p id="lobby-message" class="feedback" role="status" aria-live="polite"></p>
+          <footer class="lobby-footer"><span>标准国际象棋规则</span><span>·</span><span>无需注册 · 不限时</span></footer>
+        </section>
+
+        <section id="game" class="game-view hidden">
+          <div class="game-topline">
+            <div><p class="eyebrow">私人棋室</p><div class="room-code-line"><strong id="room-code"></strong><button id="copy-invite" class="copy-button" title="复制邀请链接" aria-label="复制邀请链接"><span aria-hidden="true">▢</span><span>复制邀请</span></button></div></div>
+            <a class="back-link" href="/">返回大厅 <span aria-hidden="true">↗</span></a>
+          </div>
+          <div class="game-layout">
+            <div class="board-column">
+              <div class="board-player opponent-player"><span class="player-piece black-piece">♚</span><span><small>黑方</small><strong id="black-status">等待加入</strong></span><span id="black-turn-dot" class="turn-indicator"></span></div>
+              <div class="board-frame"><div id="board" class="board" role="grid" aria-label="国际象棋棋盘"></div></div>
+              <div class="board-player self-player"><span class="player-piece white-piece">♔</span><span><small>白方</small><strong id="white-status">等待加入</strong></span><span id="white-turn-dot" class="turn-indicator"></span></div>
+            </div>
+            <aside class="game-sidebar">
+              <div class="turn-card"><span class="turn-label">对局状态</span><strong id="turn-status">等待对手加入</strong><p id="game-message" class="game-message" role="status" aria-live="polite"></p></div>
+              <div id="invite-panel" class="invite-panel hidden"><label for="invite-link">邀请链接</label><div class="invite-input-row"><input id="invite-link" readonly><button id="copy-link-fallback" title="复制链接" aria-label="复制链接">⧉</button></div></div>
+              <button id="new-room" class="secondary-button hidden">新建房间 <span aria-hidden="true">↗</span></button>
+              <p class="sidebar-note">每一步由服务器校验。断线后本局结束。</p>
+            </aside>
+          </div>
+        </section>
+      </main>
+      <footer class="site-footer"><span>棋友 / CHESS</span><span>对弈，让距离近一点。</span></footer>
+    </div>
+
+    <div id="promotion-modal" class="modal hidden" role="dialog" aria-modal="true" aria-label="选择升变棋子">
+      <div class="modal-card"><p class="eyebrow">PROMOTION</p><h2>选择升变棋子</h2><div id="promotion-options" class="promotion-options"></div></div>
+    </div>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/app.js"></script>
+  </body>
+</html>

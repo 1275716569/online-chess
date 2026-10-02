@@ -1,0 +1,27 @@
+{
+  "name": "online-chess-mvp",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "start:online": "node online.js",
+    "test": "NODE_ENV=test node --test"
+  },
+  "dependencies": {
+    "chess.js": "^1.4.0",
+    "express": "^5.1.0",
+    "localtunnel": "^2.0.2",
+    "socket.io": "^4.8.1"
+  },
+  "devDependencies": {
+    "jsdom": "^30.1.1",
+    "socket.io-client": "^4.8.1"
+  },
+  "overrides": {
+    "axios": "^1.20.0"
+  }
+}
